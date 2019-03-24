@@ -33,5 +33,16 @@ namespace Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithTwoRepetitionsTestCases))]
+        public void _InputWithTwoRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, List<List<T>> expected)
+        {
+            var permutations = new Permutations<T>(input);
+
+            var actual = new List<List<T>>(permutations);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
