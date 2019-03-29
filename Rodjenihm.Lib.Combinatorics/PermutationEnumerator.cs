@@ -38,9 +38,7 @@ namespace Rodjenihm.Lib.Combinatorics
                 return true;
             }
 
-            NextPermutation();
-
-            return current.SequenceEqual(input) ? false : true;
+            return NextPermutation() && !current.SequenceEqual(input);
         }
 
         public void Reset()
