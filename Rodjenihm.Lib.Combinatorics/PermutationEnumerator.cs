@@ -54,7 +54,7 @@ namespace Rodjenihm.Lib.Combinatorics
 
             if (i == 0)
             {
-                current = current.Reverse().ToArray();
+                Array.Reverse(current);
                 return true;
             }
 
