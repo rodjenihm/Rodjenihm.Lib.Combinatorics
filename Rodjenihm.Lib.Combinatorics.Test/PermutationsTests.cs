@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using Rodjenihm.Lib.Combinatorics;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Tests
@@ -16,33 +15,33 @@ namespace Tests
 
         [Test]
         [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithZeroRepetitionsTestCases))]
-        public void InputWithZeroRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, List<List<T>> expected)
+        public void InputWithZeroRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, IEnumerable<IEnumerable<T>> expected)
         {
             var permutations = new Permutations<T>(input);
 
-            var actual = new List<List<T>>(permutations);
+            var actual = new List<IEnumerable<T>>(permutations);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithOneRepetitionsTestCases))]
-        public void InputWithOneRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, List<List<T>> expected)
+        public void InputWithOneRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, IEnumerable<IEnumerable<T>> expected)
         {
             var permutations = new Permutations<T>(input);
 
-            var actual = new List<List<T>>(permutations);
+            var actual = new List<IEnumerable<T>>(permutations);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithTwoRepetitionsTestCases))]
-        public void InputWithTwoRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, List<List<T>> expected)
+        public void InputWithTwoRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, IEnumerable<IEnumerable<T>> expected)
         {
             var permutations = new Permutations<T>(input);
 
-            var actual = new List<List<T>>(permutations);
+            var actual = new List<IEnumerable<T>>(permutations);
 
             Assert.AreEqual(expected, actual);
         }
@@ -54,12 +53,12 @@ namespace Tests
 
             var permutations = new Permutations<int>(input);
 
-            var expected = new List<List<int>>
+            var expected = new List<IEnumerable<int>>
             {
                 new List<int> { 1 }
             };
 
-            var actual = new List<List<int>>(permutations);
+            var actual = new List<IEnumerable<int>>(permutations);
 
             Assert.AreEqual(expected, actual);
         }

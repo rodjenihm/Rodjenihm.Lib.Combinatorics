@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Rodjenihm.Lib.Combinatorics
 {
-    public class Permutations<T> : IEnumerable<List<T>>
+    public class Permutations<T> : IEnumerable<IEnumerable<T>>
     {
         private readonly T[] input;
         private readonly Comparer<T> comparer;
@@ -16,12 +16,12 @@ namespace Rodjenihm.Lib.Combinatorics
                 throw new ArgumentNullException(nameof(input));
 
             this.input = input.ToArray();
-            this.comparer = comparison == null ? Comparer<T>.Default : Comparer<T>.Create(comparison);
+            comparer = comparison == null ? Comparer<T>.Default : Comparer<T>.Create(comparison);
         }
 
-        public IEnumerator<List<T>> GetEnumerator()
+        public IEnumerator<IEnumerable<T>> GetEnumerator()
         {
-            return new PermutationEnumerator<T>(this.input, this.comparer);
+            return new PermutationEnumerator<T>(input, comparer);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

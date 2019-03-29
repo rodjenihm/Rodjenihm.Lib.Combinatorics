@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Rodjenihm.Lib.Combinatorics
 {
-    internal class PermutationEnumerator<T> : IEnumerator<List<T>>
+    internal class PermutationEnumerator<T> : IEnumerator<IEnumerable<T>>
     {
         private readonly T[] input;
         private T[] current;
@@ -19,13 +18,13 @@ namespace Rodjenihm.Lib.Combinatorics
                 throw new ArgumentNullException(nameof(input));
 
             this.input = input.ToArray();
-            this.current = input.ToArray();
+            current = input.ToArray();
             this.comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
         }
 
-        public List<T> Current => new List<T>(this.current);
+        public IEnumerable<T> Current => new List<T>(current);
 
-        object IEnumerator.Current => this.Current;
+        object IEnumerator.Current => Current;
 
         public void Dispose()
         {
@@ -57,7 +56,7 @@ namespace Rodjenihm.Lib.Combinatorics
 
             if (i == 0)
             {
-                this.current = this.current.Reverse().ToArray();
+                current = current.Reverse().ToArray();
                 return true;
             }
 
