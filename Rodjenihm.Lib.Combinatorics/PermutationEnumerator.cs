@@ -7,19 +7,20 @@ namespace Rodjenihm.Lib.Combinatorics
 {
     internal class PermutationEnumerator<T> : IEnumerator<IEnumerable<T>>
     {
-        private readonly T[] input;
-        private T[] current;
+        private readonly T[] source;
+        private readonly T[] current;
         private readonly Comparer<T> comparer;
         private bool first = true;
 
-        public PermutationEnumerator(T[] input, Comparer<T> comparer)
+        public PermutationEnumerator(T[] source, Comparer<T> comparer)
         {
-            if (input == null)
-                throw new ArgumentNullException(nameof(input));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
-            this.input = input.ToArray();
-            current = input.ToArray();
+            this.source = source.ToArray();
+            current = source.ToArray();
             this.comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
+            Array.Sort(current, comparer);
         }
 
         public IEnumerable<T> Current => new List<T>(current);
@@ -38,7 +39,7 @@ namespace Rodjenihm.Lib.Combinatorics
                 return true;
             }
 
-            return NextPermutation() && !current.SequenceEqual(input);
+            return NextPermutation();
         }
 
         public void Reset()
@@ -53,10 +54,7 @@ namespace Rodjenihm.Lib.Combinatorics
                 i--;
 
             if (i == 0)
-            {
-                Array.Reverse(current);
-                return true;
-            }
+                return false;
 
             int j = current.Length - 1;
             while (comparer.Compare(current[j], current[i - 1]) <= 0)

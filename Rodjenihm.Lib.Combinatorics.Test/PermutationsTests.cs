@@ -3,7 +3,7 @@ using Rodjenihm.Lib.Combinatorics;
 using System;
 using System.Collections.Generic;
 
-namespace Tests
+namespace Rodjenihm.Lib.Combinatorics.Test
 {
     [TestFixture]
     public class PermutationsTests
@@ -15,9 +15,9 @@ namespace Tests
 
         [Test]
         [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithZeroRepetitionsTestCases))]
-        public void InputWithZeroRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, IEnumerable<IEnumerable<T>> expected)
+        public void InputWithZeroRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> source, IEnumerable<IEnumerable<T>> expected)
         {
-            var permutations = new Permutations<T>(input);
+            var permutations = new Permutations<T>(source);
 
             var actual = new List<IEnumerable<T>>(permutations);
 
@@ -26,9 +26,9 @@ namespace Tests
 
         [Test]
         [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithOneRepetitionsTestCases))]
-        public void InputWithOneRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, IEnumerable<IEnumerable<T>> expected)
+        public void InputWithOneRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> source, IEnumerable<IEnumerable<T>> expected)
         {
-            var permutations = new Permutations<T>(input);
+            var permutations = new Permutations<T>(source);
 
             var actual = new List<IEnumerable<T>>(permutations);
 
@@ -37,9 +37,9 @@ namespace Tests
 
         [Test]
         [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithTwoRepetitionsTestCases))]
-        public void InputWithTwoRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> input, IEnumerable<IEnumerable<T>> expected)
+        public void InputWithTwoRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> source, IEnumerable<IEnumerable<T>> expected)
         {
-            var permutations = new Permutations<T>(input);
+            var permutations = new Permutations<T>(source);
 
             var actual = new List<IEnumerable<T>>(permutations);
 
@@ -49,9 +49,9 @@ namespace Tests
         [Test]
         public void InputHasOneElement_GeneratesOnePermutation()
         {
-            int[] input = new int[] { 1 };
+            int[] source = new int[] { 1 };
 
-            var permutations = new Permutations<int>(input);
+            var permutations = new Permutations<int>(source);
 
             var expected = new List<IEnumerable<int>>
             {
@@ -66,9 +66,9 @@ namespace Tests
         [Test]
         public void InputIsNull_ThrowsArgumentNullException()
         {
-            int[] input = null;
+            int[] source = null;
 
-            Assert.Throws<ArgumentNullException>(() => new Permutations<int>(input));
+            Assert.Throws<ArgumentNullException>(() => new Permutations<int>(source));
         }
     }
 }
