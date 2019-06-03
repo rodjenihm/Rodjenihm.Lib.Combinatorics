@@ -8,23 +8,21 @@ namespace Rodjenihm.Lib.Combinatorics
     internal class CombinationEnumerator<T> : IEnumerator<IEnumerable<T>>
     {
         private readonly T[] source;
-        private readonly int k;
-        private readonly Comparer<T> comparer;
+        private T[] cur;
+        private readonly int order;
         private readonly int[] selector;
         private bool first = true;
 
-        public CombinationEnumerator(T[] source, int k, Comparer<T> comparer)
+        public CombinationEnumerator(T[] source, int order, Comparer<T> comparer)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-
             this.source = source.ToArray();
-            this.k = k;
-            this.comparer = comparer;
-            selector = Enumerable.Range(0, k).ToArray();
+            this.order = order;
+            selector = Enumerable.Range(0, order).ToArray();
+            Array.Sort(this.source, comparer);
+            cur = this.source.Take(order).ToArray();
         }
 
-        public IEnumerable<T> Current => selector.Select(i => source[i]).ToList();
+        public IEnumerable<T> Current => new List<T>(selector.Select(i => source[i]).ToArray());
 
         object IEnumerator.Current => Current;
 
@@ -40,7 +38,7 @@ namespace Rodjenihm.Lib.Combinatorics
                 return true;
             }
 
-            return NextCombination();
+            return NextSelector();
         }
 
         public void Reset()
@@ -48,9 +46,9 @@ namespace Rodjenihm.Lib.Combinatorics
             throw new NotImplementedException();
         }
 
-        private bool NextCombination()
+        private bool NextSelector()
         {
-            int i = k - 1;
+            int i = order - 1;
             int max = source.Length - 1;
 
             while (selector[i] == max)
@@ -64,8 +62,13 @@ namespace Rodjenihm.Lib.Combinatorics
 
             selector[i]++;
 
-            for (int j = i + 1; j < k; j++)
+            for (int j = i + 1; j < order; j++)
                 selector[j] = selector[j - 1] + 1;
+
+            if (Current.SequenceEqual(cur))
+                return NextSelector();
+
+            cur = Current.ToArray();
 
             return true;
         }

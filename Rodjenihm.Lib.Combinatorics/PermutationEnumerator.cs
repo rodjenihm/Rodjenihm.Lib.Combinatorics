@@ -7,19 +7,14 @@ namespace Rodjenihm.Lib.Combinatorics
 {
     internal class PermutationEnumerator<T> : IEnumerator<IEnumerable<T>>
     {
-        private readonly T[] source;
         private readonly T[] current;
         private readonly Comparer<T> comparer;
         private bool first = true;
 
         public PermutationEnumerator(T[] source, Comparer<T> comparer)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source));
-
-            this.source = source.ToArray();
             current = source.ToArray();
-            this.comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
+            this.comparer = comparer;
             Array.Sort(current, comparer);
         }
 
