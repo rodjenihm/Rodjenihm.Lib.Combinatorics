@@ -26,7 +26,7 @@ namespace Rodjenihm.Lib.Combinatorics
         public Permutations(IEnumerable<T> source, int start, int end, Comparer<T> comparer = null) : this(source, comparer)
         {
             this.start = start;
-            this.end = end;
+            this.end = end - 1;
         }
 
         public IEnumerator<IEnumerable<T>> GetEnumerator()

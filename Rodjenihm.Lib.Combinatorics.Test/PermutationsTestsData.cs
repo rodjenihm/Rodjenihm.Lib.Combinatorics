@@ -198,7 +198,7 @@ namespace Rodjenihm.Lib.Combinatorics.Test
                     (
                         new List<int> { 1, 2, 3, 4 },
                         1,
-                        2,
+                        3,
                         arg2_3
                     );
 
@@ -207,7 +207,7 @@ namespace Rodjenihm.Lib.Combinatorics.Test
                     (
                         new List<int> { 1, 2, 3, 4, 5 },
                         1,
-                        3,
+                        4,
                         arg2_4
                     );
             }
