@@ -8,12 +8,16 @@ namespace Rodjenihm.Lib.Combinatorics
     internal class PermutationEnumerator<T> : IEnumerator<IEnumerable<T>>
     {
         private readonly T[] current;
+        private readonly int start;
+        private readonly int end;
         private readonly Comparer<T> comparer;
         private bool first = true;
 
-        public PermutationEnumerator(T[] source, Comparer<T> comparer)
+        public PermutationEnumerator(T[] source, int start, int end, Comparer<T> comparer)
         {
             current = source.ToArray();
+            this.start = start;
+            this.end = end;
             this.comparer = comparer;
             Array.Sort(current, comparer);
         }
@@ -44,20 +48,20 @@ namespace Rodjenihm.Lib.Combinatorics
 
         private bool NextPermutation()
         {
-            int i = current.Length - 1;
-            while (i > 0 && comparer.Compare(current[i - 1], current[i]) >= 0)
+            int i = end;
+            while (i > start && comparer.Compare(current[i - 1], current[i]) >= 0)
                 i--;
 
-            if (i == 0)
+            if (i == start)
                 return false;
 
-            int j = current.Length - 1;
+            int j = end;
             while (comparer.Compare(current[j], current[i - 1]) <= 0)
                 j--;
 
             Swap(i - 1, j);
 
-            j = current.Length - 1;
+            j = end;
             while (i < j)
                 Swap(i++, j--);
 

@@ -172,5 +172,45 @@ namespace Rodjenihm.Lib.Combinatorics.Test
                     );
             }
         }
+
+        public static IEnumerable<TestCaseData> InputWithZeroRepetitionsAndLimitsTestCases
+        {
+            get
+            {
+                var arg2_3 = new List<List<int>>
+                            {
+                                new List<int> { 1, 2, 3, 4 },
+                                new List<int> { 1, 3, 2, 4 },
+                            };
+
+                var arg2_4 = new List<List<int>>
+                            {
+                                new List<int> { 1, 2, 3, 4, 5 },
+                                new List<int> { 1, 2, 4, 3, 5 },
+                                new List<int> { 1, 3, 2, 4, 5 },
+                                new List<int> { 1, 3, 4, 2, 5 },
+                                new List<int> { 1, 4, 2, 3, 5 },
+                                new List<int> { 1, 4, 3, 2, 5 },
+                            };
+
+                yield return new
+                  TestCaseData
+                    (
+                        new List<int> { 1, 2, 3, 4 },
+                        1,
+                        2,
+                        arg2_3
+                    );
+
+                yield return new
+                  TestCaseData
+                    (
+                        new List<int> { 1, 2, 3, 4, 5 },
+                        1,
+                        3,
+                        arg2_4
+                    );
+            }
+        }
     }
 }

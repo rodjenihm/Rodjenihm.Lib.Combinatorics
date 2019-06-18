@@ -13,6 +13,17 @@ namespace Rodjenihm.Lib.Combinatorics.Test
         }
 
         [Test]
+        [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithZeroRepetitionsAndLimitsTestCases))]
+        public void InputWithZeroRepetitionsAndLimits_GeneratesAllPermutations<T>(IEnumerable<T> source, int start, int end, IEnumerable<IEnumerable<T>> expected)
+        {
+            var permutations = new Permutations<T>(source, start, end);
+
+            var actual = new List<IEnumerable<T>>(permutations);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
         [TestCaseSource(typeof(PermutationsTestsData), nameof(PermutationsTestsData.InputWithZeroRepetitionsTestCases))]
         public void InputWithZeroRepetitions_GeneratesAllPermutations<T>(IEnumerable<T> source, IEnumerable<IEnumerable<T>> expected)
         {
