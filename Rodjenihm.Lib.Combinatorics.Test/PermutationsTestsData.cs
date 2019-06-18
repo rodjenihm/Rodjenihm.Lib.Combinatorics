@@ -193,6 +193,16 @@ namespace Rodjenihm.Lib.Combinatorics.Test
                                 new List<int> { 1, 4, 3, 2, 5 },
                             };
 
+                var arg2_5 = new List<List<int>>
+                            {
+                                new List<int> { 1, 1, 0, 0, 1, 1, 0},
+                                new List<int> { 1, 1, 0, 1, 0, 1, 0},
+                                new List<int> { 1, 1, 0, 1, 1, 0, 0},
+                                new List<int> { 1, 1, 1, 0, 0, 1, 0},
+                                new List<int> { 1, 1, 1, 0, 1, 0, 0},
+                                new List<int> { 1, 1, 1, 1, 0, 0, 0},
+                            };
+
                 yield return new
                   TestCaseData
                     (
@@ -209,6 +219,15 @@ namespace Rodjenihm.Lib.Combinatorics.Test
                         1,
                         4,
                         arg2_4
+                    );
+
+                yield return new
+                  TestCaseData
+                    (
+                        new List<int> { 1, 1, 1, 1, 0, 0, 0 },
+                        2,
+                        6,
+                        arg2_5
                     );
             }
         }

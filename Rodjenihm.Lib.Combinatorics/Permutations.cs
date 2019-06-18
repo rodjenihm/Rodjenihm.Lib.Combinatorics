@@ -19,14 +19,14 @@ namespace Rodjenihm.Lib.Combinatorics
 
             this.source = source.ToArray();
             start = 0;
-            end = this.source.Length - 1;
+            end = this.source.Length;
             this.comparer = comparer ?? Comparer<T>.Default;
         }
 
         public Permutations(IEnumerable<T> source, int start, int end, Comparer<T> comparer = null) : this(source, comparer)
         {
             this.start = start;
-            this.end = end - 1;
+            this.end = end;
         }
 
         public IEnumerator<IEnumerable<T>> GetEnumerator()

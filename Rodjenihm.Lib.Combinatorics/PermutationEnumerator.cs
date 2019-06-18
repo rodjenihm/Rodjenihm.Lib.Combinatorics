@@ -19,7 +19,7 @@ namespace Rodjenihm.Lib.Combinatorics
             this.start = start;
             this.end = end;
             this.comparer = comparer;
-            Array.Sort(current, comparer);
+            Array.Sort(current, index: start, length: end - start, comparer);
         }
 
         public IEnumerable<T> Current => new List<T>(current);
@@ -48,20 +48,20 @@ namespace Rodjenihm.Lib.Combinatorics
 
         private bool NextPermutation()
         {
-            int i = end;
+            int i = end - 1;
             while (i > start && comparer.Compare(current[i - 1], current[i]) >= 0)
                 i--;
 
             if (i == start)
                 return false;
 
-            int j = end;
+            int j = end - 1;
             while (comparer.Compare(current[j], current[i - 1]) <= 0)
                 j--;
 
             Swap(i - 1, j);
 
-            j = end;
+            j = end - 1;
             while (i < j)
                 Swap(i++, j--);
 
