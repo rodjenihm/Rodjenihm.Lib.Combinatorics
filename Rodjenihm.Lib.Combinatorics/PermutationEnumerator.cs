@@ -52,7 +52,7 @@ namespace Rodjenihm.Lib.Combinatorics
             while (i > start && comparer.Compare(current[i - 1], current[i]) >= 0)
                 i--;
 
-            if (i == start)
+            if (i <= start)
                 return false;
 
             int j = end - 1;

@@ -25,6 +25,9 @@ namespace Rodjenihm.Lib.Combinatorics
 
         public Permutations(IEnumerable<T> source, int start, int end, Comparer<T> comparer = null) : this(source, comparer)
         {
+            if (end < start)
+                throw new ArgumentException("end cannot be lower than start");
+
             this.start = start;
             this.end = end;
         }
